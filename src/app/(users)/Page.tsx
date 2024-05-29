@@ -34,17 +34,13 @@ const Page = () => {
       flexDirection={'column'}
       gap={'16px'}
     >
-      {
-        modalOpen && (
-          <UserModal 
-            key={`modal-create-${Math.random()}`}
-            open
-            type="create"
-            onClose={handleCloseModal}
-            onCreate={(data) => handleCreateUser(data)}
-          />
-        )
-      }
+        <UserModal 
+          id="modal-create"
+          open={modalOpen!["modal-create"] === true}
+          type="create"
+          onClose={() => handleCloseModal('modal-create')}
+          onCreate={(data) => handleCreateUser(data)}
+        />
       <Box
         display={'flex'}
         alignItems={'center'}
@@ -55,7 +51,7 @@ const Page = () => {
           variant="contained"
           color="primary"
           startIcon={<Add sx={{color: colors.white.light, fontSize: '18px'}} />}
-          onClick={handleOpenModal}
+          onClick={() => handleOpenModal("modal-create")}
         >
           <Typography variant="button" color={colors.white.light}>Create User</Typography>
         </Button>

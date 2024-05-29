@@ -33,6 +33,18 @@ export const userSlice = createSlice({
         console.log(error)
       }
     },
+    updateUser: (state, action: PayloadAction<User>) => {
+      try {
+        state.users.map((user) => {
+          if (user.id === action.payload.id) {
+            return action.payload
+          }
+          return user
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    },
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload
     },
@@ -42,5 +54,5 @@ export const userSlice = createSlice({
   },
 })
 
-export const {setUser, addUser, setPage, setRowsPerPage} = userSlice.actions
+export const {setUser, addUser, updateUser, setPage, setRowsPerPage} = userSlice.actions
 export const userReducer = userSlice.reducer

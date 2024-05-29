@@ -1,31 +1,44 @@
-import { addUser } from "@/libs/redux/features/users/users";
+import { addUser, updateUser } from "@/libs/redux/features/users/users";
 import { User } from "@/types/user";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
+interface IModalOpenState {
+  [id: string]: boolean;
+}
+
 const useUser = () => {
   const dispatch = useDispatch();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState<IModalOpenState>({});
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
+  const handleCloseModal = (id: string) => {
+    setModalOpen({
+      [id]: false
+    });
   };
 
-  const handleOpenModal = () => {
-    setModalOpen(true);
+  const handleOpenModal = (id: string) => {
+    setModalOpen({
+      [id]: true
+    });
   };
 
   const handleCreateUser = (data: User) => {
     try {
       dispatch(addUser(data));
-      handleCloseModal()
+      setModalOpen({})
     } catch (error) {
       console.log(error);
     }
   };
   
   const handleUpdateUser = (data: User) => {
-    console.log('update user : ', data);
+    try {
+      dispatch(updateUser(data))
+      setModalOpen({})
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return {

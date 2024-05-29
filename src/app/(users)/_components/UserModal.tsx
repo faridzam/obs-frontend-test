@@ -8,10 +8,11 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
 import { ChangeEvent, useState } from "react"
 
 interface IUserModalProps {
+  id: string,
   type?: 'create' | 'update'
   open: boolean
   data?: User
-  onClose: () => void
+  onClose: (id: string) => void
   onCreate?: (data: User) => void
   onUpdate?: (data: User) => void
 }
@@ -42,6 +43,7 @@ const initialState: User = {
 
 const UserModal = (props: IUserModalProps) => {
   const {
+    id,
     type = 'create',
     open,
     data = initialState,
@@ -75,14 +77,14 @@ const UserModal = (props: IUserModalProps) => {
     setForm((prevState: User) => setNestedState(prevState, keys, value));
   };
 
-  // simple validation (just require not empty)
   const disabledSubmit = checkEmptyForm(form, []).includes(true)
 
   return(
     <>
       <Dialog
+        id={id}
         fullScreen={fullScreen}
-        open={open}
+        open={open || false}
         onClose={onClose}
         sx={{
           zIndex: '10000'
@@ -246,7 +248,7 @@ const UserModal = (props: IUserModalProps) => {
           </Grid2>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" color="error" onClick={onClose}>
+          <Button variant="outlined" color="error" onClick={() => onClose(id)}>
             Cancel
           </Button>
           <Button disabled={disabledSubmit} variant="contained" color="primary" onClick={onSubmit} autoFocus>

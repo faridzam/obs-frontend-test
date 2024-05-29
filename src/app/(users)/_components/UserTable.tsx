@@ -4,6 +4,9 @@ import { RootState } from "@/libs/redux/store";
 import { Delete, Description, Edit } from "@mui/icons-material";
 import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import { Fragment } from "react/jsx-runtime";
+import useUser from "../_hooks/useUser.hook";
+import UserModal from "./UserModal";
 
 interface Column {
   id: 'photo' | 'name' | 'username' | 'email' | 'address' | 'phone' | 'company' | 'action';
@@ -26,6 +29,13 @@ const columns: readonly Column[] = [
 const UserTable = () => {
 
   const dispatch = useDispatch()
+
+  const {
+    modalOpen,
+    handleOpenModal,
+    handleCloseModal,
+    handleUpdateUser
+  } = useUser()
 
   const users = useSelector((state:RootState) => state.user.users)
   const page = useSelector((state:RootState) => state.user.page)
@@ -80,56 +90,66 @@ const UserTable = () => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={`user-${row.id}`}>
-                    <TableCell align={'center'}>
-                      <img
-                        src={`https://picsum.photos/id/${row.id}/40.webp`}
-                        alt={`photo-${row.id}`}
-                        style={{
-                          borderRadius: '8px'
+                  <Fragment key={`user-${row.id}`} >
+                    <UserModal
+                      id={`modal-update-${row.id}`}
+                      open={modalOpen![`modal-update-${row.id}`]}
+                      type="update"
+                      data={row}
+                      onClose={handleCloseModal}
+                      onUpdate={(data) => handleUpdateUser(data)}
+                    />
+                    <TableRow hover role="checkbox" tabIndex={-1}>
+                      <TableCell align={'center'}>
+                        <img
+                          src={`https://picsum.photos/id/${row.id}/40.webp`}
+                          alt={`photo-${row.id}`}
+                          style={{
+                            borderRadius: '8px'
+                          }}
+                        />
+                      </TableCell>
+                      <TableCell align={'left'}>
+                        <Typography variant="body2">{row.name}</Typography>
+                      </TableCell>
+                      <TableCell align={'left'}>
+                        <Typography variant="body2">{row.username}</Typography>
+                      </TableCell>
+                      <TableCell align={'left'}>
+                        <Typography variant="body2">{row.email}</Typography>
+                      </TableCell>
+                      <TableCell align={'left'}>
+                        <Typography variant="body2">{row.address.street}</Typography>
+                        <Typography variant="body2">{row.address.suite}</Typography>
+                        <Typography variant="body2">{row.address.city}, {row.address.zipcode}</Typography>
+                      </TableCell>
+                      <TableCell align={'left'}>
+                        <Typography variant="body2">{row.phone}</Typography>
+                      </TableCell>
+                      <TableCell align={'left'}>
+                        <Typography variant="body2">{row.company.name}</Typography>
+                      </TableCell>
+                      <TableCell
+                        align={'left'}
+                        sx={{
+                          position: "sticky",
+                          right: 0,
+                          background: colors.secondary.light,
+                          zIndex: "9998 !important",
                         }}
-                      />
-                    </TableCell>
-                    <TableCell align={'left'}>
-                      <Typography variant="body2">{row.name}</Typography>
-                    </TableCell>
-                    <TableCell align={'left'}>
-                      <Typography variant="body2">{row.username}</Typography>
-                    </TableCell>
-                    <TableCell align={'left'}>
-                      <Typography variant="body2">{row.email}</Typography>
-                    </TableCell>
-                    <TableCell align={'left'}>
-                      <Typography variant="body2">{row.address.street}</Typography>
-                      <Typography variant="body2">{row.address.suite}</Typography>
-                      <Typography variant="body2">{row.address.city}, {row.address.zipcode}</Typography>
-                    </TableCell>
-                    <TableCell align={'left'}>
-                      <Typography variant="body2">{row.phone}</Typography>
-                    </TableCell>
-                    <TableCell align={'left'}>
-                      <Typography variant="body2">{row.company.name}</Typography>
-                    </TableCell>
-                    <TableCell
-                      align={'left'}
-                      sx={{
-                        position: "sticky",
-                        right: 0,
-                        background: colors.secondary.light,
-                        zIndex: "9998 !important",
-                      }}
-                    >
-                      <IconButton>
-                        <Description />
-                      </IconButton>
-                      <IconButton>
-                        <Edit />
-                      </IconButton>
-                      <IconButton>
-                        <Delete />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
+                      >
+                        <IconButton>
+                          <Description />
+                        </IconButton>
+                        <IconButton onClick={() => handleOpenModal(`modal-update-${row.id}`)}>
+                          <Edit />
+                        </IconButton>
+                        <IconButton>
+                          <Delete />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  </Fragment>
                 );
               })}
           </TableBody>
