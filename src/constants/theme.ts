@@ -11,13 +11,13 @@ export const theme = createTheme({
     secondary: {
       dark: '#78B6FA',
       main: '#88CBFA',
-      light: '#A8D7FA'
+      light: '#A8D7FA',
     },
     error: {
       dark: '#c91010',
       main: '#F15858',
-      light: '#f37878'
-    }
+      light: '#f37878',
+    },
   },
   typography: {
     fontFamily: 'Montserrat Variable',
@@ -27,16 +27,16 @@ export const theme = createTheme({
       defaultProps: {
         color: colors.black.main,
         padding: 0,
-        margin: 0
-      }
+        margin: 0,
+      },
     },
     MuiPaper: {
       defaultProps: {
         style: {
           borderRadius: '16px',
-          padding: '24px 24px'
-        }
-      }
-    }
-  }
+          padding: '24px 24px',
+        },
+      },
+    },
+  },
 });

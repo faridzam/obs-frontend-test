@@ -1,6 +1,11 @@
-import { colors } from "@/constants/colors";
-import { FormControl, FormHelperText, InputBase, Typography } from "@mui/material";
-import { ChangeEvent, HTMLInputTypeAttribute } from "react";
+import { colors } from '@/constants/colors';
+import {
+  FormControl,
+  FormHelperText,
+  InputBase,
+  Typography,
+} from '@mui/material';
+import { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 
 interface ITextInputProps {
   name?: string;
@@ -18,7 +23,7 @@ interface ITextInputProps {
 
 const TextInput = (props: ITextInputProps) => {
   const {
-    name = "",
+    name = '',
     type = 'text',
     label,
     placeholder = '',
@@ -28,14 +33,16 @@ const TextInput = (props: ITextInputProps) => {
     disabled = false,
     limitChar,
     value,
-    onChange
-  } = props
+    onChange,
+  } = props;
 
-  const handleChangeValue = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    onChange(e)
-  }
+  const handleChangeValue = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    onChange(e);
+  };
 
-  return(
+  return (
     <FormControl fullWidth>
       <Typography component={'span'} variant="body1">
         {label}
@@ -73,7 +80,7 @@ const TextInput = (props: ITextInputProps) => {
         {error ? errorHintText : hintText}
       </FormHelperText>
     </FormControl>
-  )
-}
+  );
+};
 
-export default TextInput
+export default TextInput;

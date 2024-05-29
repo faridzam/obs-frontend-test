@@ -7,12 +7,12 @@ export const colors = {
   secondary: {
     dark: '#78B6FA',
     main: '#88CBFA',
-    light: '#A8D7FA'
+    light: '#A8D7FA',
   },
   error: {
     dark: '#c91010',
     main: '#F15858',
-    light: '#f37878'
+    light: '#f37878',
   },
   black: {
     main: '#444',
@@ -22,5 +22,5 @@ export const colors = {
     dark: '#bbb',
     main: '#ddd',
     light: '#fff',
-  }
-}
+  },
+};

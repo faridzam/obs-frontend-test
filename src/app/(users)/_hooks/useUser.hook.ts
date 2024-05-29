@@ -1,7 +1,11 @@
-import { addUser, deleteUser, updateUser } from "@/libs/redux/features/users/users";
-import { User } from "@/types/user";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import {
+  addUser,
+  deleteUser,
+  updateUser,
+} from '@/libs/redux/features/users/users';
+import { User } from '@/types/user';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 interface IModalOpenState {
   [id: string]: boolean;
@@ -13,38 +17,38 @@ const useUser = () => {
 
   const handleCloseModal = (id: string) => {
     setModalOpen({
-      [id]: false
+      [id]: false,
     });
   };
 
   const handleOpenModal = (id: string) => {
     setModalOpen({
-      [id]: true
+      [id]: true,
     });
   };
 
   const handleCreateUser = (data: User) => {
     try {
       dispatch(addUser(data));
-      setModalOpen({})
+      setModalOpen({});
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   const handleUpdateUser = (data: User) => {
     try {
-      dispatch(updateUser(data))
-      setModalOpen({})
+      dispatch(updateUser(data));
+      setModalOpen({});
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   const handleDeleteUser = (id: number) => {
     try {
-      dispatch(deleteUser(id))
+      dispatch(deleteUser(id));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -54,8 +58,8 @@ const useUser = () => {
     handleCloseModal,
     handleCreateUser,
     handleUpdateUser,
-    handleDeleteUser
+    handleDeleteUser,
   };
 };
 
-export default useUser
+export default useUser;

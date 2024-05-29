@@ -1,34 +1,33 @@
-import { apiRequest } from "@/libs/axios/apiRequest"
-import { lazy } from "react"
-import { Navigate, RouteObject } from "react-router-dom"
+import { apiRequest } from '@/libs/axios/apiRequest';
+import { lazy } from 'react';
+import { Navigate, RouteObject } from 'react-router-dom';
 
 export default function PublicRoutes(): RouteObject[] {
+  const MainLayout = lazy(() => import('@/components/layouts/MainLayout'));
+  const MainPage = lazy(() => import('@/app/(users)/Page'));
 
-  const MainLayout = lazy(() => import("@/components/layouts/MainLayout"))
-  const MainPage = lazy(() => import("@/app/(users)/Page"))
-  
   return [
     {
-      path: "/",
+      path: '/',
       element: <MainLayout />,
       children: [
         {
-          path: "",
-          element: <Navigate to={'/users'} replace />
+          path: '',
+          element: <Navigate to={'/users'} replace />,
         },
         {
-          path: "*",
-          element: <Navigate to={'/users'} replace />
+          path: '*',
+          element: <Navigate to={'/users'} replace />,
         },
         {
-          path: "users",
+          path: 'users',
           element: <MainPage />,
           loader: async () => {
-            const defaultUsers = (await apiRequest.get('/users')).data
-            return {defaultUsers}
-          }
+            const defaultUsers = (await apiRequest.get('/users')).data;
+            return { defaultUsers };
+          },
         },
-      ]
+      ],
     },
-  ]
+  ];
 }

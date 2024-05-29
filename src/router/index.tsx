@@ -1,8 +1,6 @@
-import { createBrowserRouter } from "react-router-dom";
-import PublicRoutes from "./PublicRoutes";
+import { createBrowserRouter } from 'react-router-dom';
+import PublicRoutes from './PublicRoutes';
 
-const Router = createBrowserRouter([
-  ...PublicRoutes()
-])
+const Router = createBrowserRouter([...PublicRoutes()]);
 
-export default Router
+export default Router;

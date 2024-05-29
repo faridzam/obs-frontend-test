@@ -1,7 +1,7 @@
 interface Geo {
   lat: string;
   lng: string;
-  [key: string]: unknown
+  [key: string]: unknown;
 }
 
 interface Address {
@@ -10,14 +10,14 @@ interface Address {
   city: string;
   zipcode: string;
   geo: Geo;
-  [key: string]: unknown
+  [key: string]: unknown;
 }
 
 interface Company {
   name: string;
   catchPhrase: string;
   bs: string;
-  [key: string]: unknown
+  [key: string]: unknown;
 }
 
 export interface User {
@@ -29,5 +29,5 @@ export interface User {
   phone: string;
   website: string;
   company: Company;
-  [key: string]: unknown
+  [key: string]: unknown;
 }

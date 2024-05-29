@@ -8,22 +8,22 @@ const requestConfig: IConfig = {
   baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 5000,
   headers: {
-    "accept": 'application/json',
+    accept: 'application/json',
   },
 };
 
-class HttpRequest{
+class HttpRequest {
   api: Axios;
   constructor() {
     this.api = axios.create(requestConfig);
-        
+
     this.api.interceptors.request.use(
       (config) => {
         return config;
       },
       (error) => {
         return Promise.reject(error);
-      },
+      }
     );
 
     this.api.interceptors.response.use(
@@ -31,9 +31,8 @@ class HttpRequest{
         return res;
       },
       async (error) => {
-
         return Promise.reject(error);
-      },
+      }
     );
   }
 

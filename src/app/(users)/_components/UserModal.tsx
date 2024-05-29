@@ -1,20 +1,30 @@
-import TextInput from "@/components/inputs/TextInput"
-import { User } from "@/types/user"
-import { checkEmptyForm } from "@/utils/object"
-import { setNestedState } from "@/utils/stateHelper"
-import { capitalizeFirstLetter } from "@/utils/strings"
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Typography, useMediaQuery, useTheme } from "@mui/material"
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
-import { ChangeEvent, useState } from "react"
+import TextInput from '@/components/inputs/TextInput';
+import { User } from '@/types/user';
+import { checkEmptyForm } from '@/utils/object';
+import { setNestedState } from '@/utils/stateHelper';
+import { capitalizeFirstLetter } from '@/utils/strings';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { ChangeEvent, useState } from 'react';
 
 interface IUserModalProps {
-  id: string,
-  type?: 'create' | 'update'
-  open: boolean
-  data?: User
-  onClose: (id: string) => void
-  onCreate?: (data: User) => void
-  onUpdate?: (data: User) => void
+  id: string;
+  type?: 'create' | 'update';
+  open: boolean;
+  data?: User;
+  onClose: (id: string) => void;
+  onCreate?: (data: User) => void;
+  onUpdate?: (data: User) => void;
 }
 
 const initialState: User = {
@@ -30,7 +40,7 @@ const initialState: User = {
     geo: {
       lng: '-6.174710065565897',
       lat: '106.78988380973301',
-    }
+    },
   },
   phone: '',
   website: '',
@@ -38,8 +48,8 @@ const initialState: User = {
     name: '',
     catchPhrase: '',
     bs: '',
-  }
-}
+  },
+};
 
 const UserModal = (props: IUserModalProps) => {
   const {
@@ -49,37 +59,39 @@ const UserModal = (props: IUserModalProps) => {
     data = initialState,
     onClose,
     onCreate = () => {},
-    onUpdate = () => {}
-  } = props
+    onUpdate = () => {},
+  } = props;
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const onSubmit = () => {
     switch (type) {
       case 'create':
-        onCreate(form)
+        onCreate(form);
         break;
       case 'update':
-        onUpdate(form)
+        onUpdate(form);
         break;
-    
+
       default:
         break;
     }
-  }
+  };
 
-  const [form, setForm] = useState<User>(() => data)
+  const [form, setForm] = useState<User>(() => data);
 
-  const handleChangeForm = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChangeForm = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = event.target;
     const keys = name.split('.');
 
     setForm((prevState: User) => setNestedState(prevState, keys, value));
   };
 
-  const disabledSubmit = checkEmptyForm(form, []).includes(true)
+  const disabledSubmit = checkEmptyForm(form, []).includes(true);
 
-  return(
+  return (
     <>
       <Dialog
         id={id}
@@ -87,19 +99,14 @@ const UserModal = (props: IUserModalProps) => {
         open={open || false}
         onClose={onClose}
         sx={{
-          zIndex: '10000'
+          zIndex: '10000',
         }}
       >
         <DialogTitle variant="h4">
           {`${capitalizeFirstLetter(type)} User ${data.id || ''}`}
         </DialogTitle>
         <DialogContent>
-          <Grid2
-            container
-            direction={'row'}
-            spacing={3}
-            columns={16}
-          >
+          <Grid2 container direction={'row'} spacing={3} columns={16}>
             <Grid2 xs={16}>
               <Typography variant="h6">Personal Information</Typography>
             </Grid2>
@@ -251,13 +258,19 @@ const UserModal = (props: IUserModalProps) => {
           <Button variant="outlined" color="error" onClick={() => onClose(id)}>
             Cancel
           </Button>
-          <Button disabled={disabledSubmit} variant="contained" color="primary" onClick={onSubmit} autoFocus>
+          <Button
+            disabled={disabledSubmit}
+            variant="contained"
+            color="primary"
+            onClick={onSubmit}
+            autoFocus
+          >
             Submit
           </Button>
         </DialogActions>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default UserModal
+export default UserModal;

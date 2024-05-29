@@ -1,27 +1,36 @@
-import { CircularProgress, Dialog, DialogContent, DialogTitle } from '@mui/material';
+import {
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from '@mui/material';
 import { SyntheticEvent } from 'react';
 
 const LoadingModal = () => {
-
-  const handleDlgClose = (_event: SyntheticEvent<Element, Event>, reason: string) => {
-    if (reason && reason == "backdropClick") {
+  const handleDlgClose = (
+    _event: SyntheticEvent<Element, Event>,
+    reason: string
+  ) => {
+    if (reason && reason == 'backdropClick') {
       return;
     }
-  }
+  };
 
   return (
     <Dialog
       open={true}
       disableEscapeKeyDown
-      onClose={(event: SyntheticEvent<Element, Event>, reason) => handleDlgClose(event, reason)}
+      onClose={(event: SyntheticEvent<Element, Event>, reason) =>
+        handleDlgClose(event, reason)
+      }
       PaperProps={{
         style: {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: 'transparent',
-          boxShadow: 'none'
-        }
+          boxShadow: 'none',
+        },
       }}
     >
       <DialogContent>
@@ -29,7 +38,6 @@ const LoadingModal = () => {
       </DialogContent>
       <DialogTitle>Loading...</DialogTitle>
     </Dialog>
-
   );
 };
 
