@@ -14,21 +14,23 @@ const Sidebar = (props: ISidebarProps) => {
     <Box 
       role="presentation"
       onClick={() => toggleDrawer(false)}
-      sx={{ 
+      sx={{
+        height: '100%',
         width: '100%',
         minWidth: '250px',
-        backgroundColor: colors.primary.light,
+        backgroundColor: colors.white.main,
+        paddingTop: '104px',
       }}
     >
-      <List sx={{paddingTop: '32px'}}>
+      <List>
         {['Users'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon sx={{color: `${colors.white.light} !important`}}>
+              <ListItemIcon sx={{color: `${colors.primary.light} !important`}}>
                 <SupervisorAccount />
               </ListItemIcon>
               <ListItemText>
-                <Typography color={colors.white.light} variant="h6">{text}</Typography>
+                <Typography color={colors.primary.light} variant="h6">{text}</Typography>
               </ListItemText>
             </ListItemButton>
           </ListItem>

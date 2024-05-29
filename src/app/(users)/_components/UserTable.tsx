@@ -1,7 +1,8 @@
 import { colors } from "@/constants/colors";
 import { setPage, setRowsPerPage } from "@/libs/redux/features/users/users";
 import { RootState } from "@/libs/redux/store";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
+import { Delete, Description, Edit } from "@mui/icons-material";
+import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 interface Column {
@@ -19,7 +20,7 @@ const columns: readonly Column[] = [
   { id: 'address', label: 'Address', minWidth: 100, align: 'left' },
   { id: 'phone', label: 'Phone', minWidth: 100, align: 'left' },
   { id: 'company', label: 'Company', minWidth: 100, align: 'left' },
-  { id: 'action', label: 'Action', minWidth: 100, align: 'left' },
+  { id: 'action', label: 'Action', minWidth: 120, align: 'left' },
 ];
 
 const UserTable = () => {
@@ -40,8 +41,9 @@ const UserTable = () => {
   };
 
   return(
-    <Paper sx={{ width: '100%', overflow: 'hidden', padding: '0 !important'}}>
-      <TableContainer sx={{ height: '70vh', minHeight: '400px', maxHeight: '1154px' }}>
+    <>
+    <Paper sx={{ height: '70vh', minHeight: '250px', maxHeight: '980px', overflow: 'hidden', padding: '0 !important'}}>
+      <TableContainer sx={{ height: '70vh', minHeight: '250px', maxHeight: '1154px' }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -49,7 +51,22 @@ const UserTable = () => {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  sx={
+                    column.id === 'action'
+                    ?
+                    {
+                      minWidth: column.minWidth,
+                      position: "sticky",
+                      right: 0,
+                      background: colors.secondary.dark,
+                      zIndex: "9999 !important",
+                    }
+                    :
+                    {
+                      minWidth: column.minWidth,
+                      background: colors.secondary.light
+                    }
+                  }
                 >
                   <Typography variant="subtitle2" color={colors.black.main}>
                     {column.label}
@@ -65,29 +82,52 @@ const UserTable = () => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={`user-${row.id}`}>
                     <TableCell align={'center'}>
-                      <img key={`user-photo-${row.id}`} src={`https://picsum.photos/40.webp?random=${Math.random()}`} alt={`photo-${row.id}`} />
+                      <img
+                        src={`https://picsum.photos/id/${row.id}/40.webp`}
+                        alt={`photo-${row.id}`}
+                        style={{
+                          borderRadius: '8px'
+                        }}
+                      />
                     </TableCell>
                     <TableCell align={'left'}>
-                      <Typography variant="body1">{row.name}</Typography>
+                      <Typography variant="body2">{row.name}</Typography>
                     </TableCell>
                     <TableCell align={'left'}>
-                      <Typography variant="body1">{row.username}</Typography>
+                      <Typography variant="body2">{row.username}</Typography>
                     </TableCell>
                     <TableCell align={'left'}>
-                      <Typography variant="body1">{row.email}</Typography>
+                      <Typography variant="body2">{row.email}</Typography>
                     </TableCell>
                     <TableCell align={'left'}>
-                      <Typography variant="body1">{row.address.street}</Typography>
-                      <Typography variant="body1">{row.address.suite}</Typography>
-                      <Typography variant="body1">{row.address.city}, {row.address.zipcode}</Typography>
+                      <Typography variant="body2">{row.address.street}</Typography>
+                      <Typography variant="body2">{row.address.suite}</Typography>
+                      <Typography variant="body2">{row.address.city}, {row.address.zipcode}</Typography>
                     </TableCell>
                     <TableCell align={'left'}>
-                      <Typography variant="body1">{row.phone}</Typography>
+                      <Typography variant="body2">{row.phone}</Typography>
                     </TableCell>
                     <TableCell align={'left'}>
-                      <Typography variant="body1">{row.company.name}</Typography>
+                      <Typography variant="body2">{row.company.name}</Typography>
                     </TableCell>
-                    <TableCell align={'left'}>
+                    <TableCell
+                      align={'left'}
+                      sx={{
+                        position: "sticky",
+                        right: 0,
+                        background: colors.secondary.light,
+                        zIndex: "9998 !important",
+                      }}
+                    >
+                      <IconButton>
+                        <Description />
+                      </IconButton>
+                      <IconButton>
+                        <Edit />
+                      </IconButton>
+                      <IconButton>
+                        <Delete />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 );
@@ -95,16 +135,17 @@ const UserTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={users.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
+    <TablePagination
+      rowsPerPageOptions={[10, 25, 100]}
+      component="div"
+      count={users.length}
+      rowsPerPage={rowsPerPage}
+      page={page}
+      onPageChange={handleChangePage}
+      onRowsPerPageChange={handleChangeRowsPerPage}
+    />
+    </>
   )
 }
 

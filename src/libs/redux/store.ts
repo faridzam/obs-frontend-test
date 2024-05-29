@@ -7,7 +7,7 @@ import {
   REGISTER,
   REHYDRATE,
   persistReducer,
-  persistStore,
+  persistStore
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { userReducer } from "./features/users/users";
@@ -21,7 +21,7 @@ const persistedReducer = persistReducer(
     key: 'persist-storage',
     version: 1,
     storage,
-    blacklist: ['']
+    blacklist: [''],
   },
   reducers,
 );

@@ -30,7 +30,6 @@ const MainLayout = () => {
           position: 'fixed',
           left: 0,
           height: '100vh',
-          paddingTop: '72px'
         }}
       >
         <Drawer open={sidebarOpen} onClose={() => toggleSidebarOpen(false)} >

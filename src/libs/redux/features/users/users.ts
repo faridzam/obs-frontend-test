@@ -39,7 +39,7 @@ export const userSlice = createSlice({
     setRowsPerPage: (state, action: PayloadAction<number>) => {
       state.rowsPerPage = action.payload
     },
-  }
+  },
 })
 
 export const {setUser, addUser, setPage, setRowsPerPage} = userSlice.actions

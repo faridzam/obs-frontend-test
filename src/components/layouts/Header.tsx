@@ -1,4 +1,4 @@
-import Logo from '@/assets/images/logo/logo_blue.svg'
+import Logo from '@/assets/images/logo/logo.svg'
 import { colors } from "@/constants/colors"
 import { MenuRounded, Notifications } from '@mui/icons-material'
 import { Avatar, Box, IconButton, Typography } from "@mui/material"
@@ -22,7 +22,7 @@ const Header = (props: IHeaderProps) => {
       alignItems={'center'}
       position={'fixed'}
       sx={{
-        backgroundColor: colors.primary.dark,
+        backgroundColor: colors.secondary.dark,
         zIndex: '9999'
       }}
     >
@@ -43,7 +43,9 @@ const Header = (props: IHeaderProps) => {
       </Grid2>
       <Grid2 xs={3} md={4} xl={4}>
         <Box display={'flex'} justifyContent={'flex-end'} gap={'16px'}>
-          <Notifications sx={{color: colors.white.light, fontSize: '32px'}} />
+          <IconButton>
+            <Notifications sx={{color: colors.white.light, fontSize: '32px'}} />
+          </IconButton>
           <Avatar alt="account_avatar" src="https://picsum.photos/40.webp" />
         </Box>
       </Grid2>
