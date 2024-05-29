@@ -1,4 +1,4 @@
-import { addUser, updateUser } from "@/libs/redux/features/users/users";
+import { addUser, deleteUser, updateUser } from "@/libs/redux/features/users/users";
 import { User } from "@/types/user";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -40,13 +40,21 @@ const useUser = () => {
       console.log(error)
     }
   };
+  const handleDeleteUser = (id: number) => {
+    try {
+      dispatch(deleteUser(id))
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   return {
     modalOpen,
     handleOpenModal,
     handleCloseModal,
     handleCreateUser,
-    handleUpdateUser
+    handleUpdateUser,
+    handleDeleteUser
   };
 };
 

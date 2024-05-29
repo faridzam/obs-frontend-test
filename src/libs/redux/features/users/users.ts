@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit/react';
 
 export interface UserState {
-  users : User[];
+  users: User[];
   rowsPerPage: number;
   page: number;
 }
 
 const initialState: UserState = {
-  users : [],
+  users: [] as User[],
   rowsPerPage: 10,
   page: 0,
 }
@@ -28,19 +28,22 @@ export const userSlice = createSlice({
     },
     addUser: (state, action: PayloadAction<User>) => {
       try {
-        state.users.push(action.payload)
+        state.users.push({...action.payload, id: Math.random()})
       } catch (error) {
         console.log(error)
       }
     },
     updateUser: (state, action: PayloadAction<User>) => {
       try {
-        state.users.map((user) => {
-          if (user.id === action.payload.id) {
-            return action.payload
-          }
-          return user
-        })
+        const userIndex = [...state.users].findIndex((user) => user.id === action.payload.id)
+        state.users[userIndex] = action.payload
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    deleteUser: (state, action: PayloadAction<number>) => {
+      try {
+        state.users = [...state.users.filter((user) => user.id !== action.payload)]
       } catch (error) {
         console.log(error)
       }
@@ -54,5 +57,5 @@ export const userSlice = createSlice({
   },
 })
 
-export const {setUser, addUser, updateUser, setPage, setRowsPerPage} = userSlice.actions
+export const {setUser, addUser, updateUser, deleteUser, setPage, setRowsPerPage} = userSlice.actions
 export const userReducer = userSlice.reducer

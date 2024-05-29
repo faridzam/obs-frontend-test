@@ -24,21 +24,8 @@ export default function PublicRoutes(): RouteObject[] {
           path: "users",
           element: <MainPage />,
           loader: async () => {
-            // let users: User[] = []
-            // console.log(store.getState()._persist)
-            // if (store.getState().user.users && store.getState().user.users.length <= 0) {
-            //   try {
-            //     const defaultUser = (await apiRequest.get('/users')).data
-            //     users = defaultUser
-            //   } catch (error) {
-            //     console.log(error)
-            //   }
-            // } else {
-            //   users = store.getState().user.users
-            // }
-            // store.dispatch(setUser(users))
-            const defaultUser = (await apiRequest.get('/users')).data
-            return {defaultUser}
+            const defaultUsers = (await apiRequest.get('/users')).data
+            return {defaultUsers}
           }
         },
       ]

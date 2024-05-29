@@ -1,7 +1,6 @@
 import { colors } from "@/constants/colors"
 import { setUser } from "@/libs/redux/features/users/users"
-import { useAppSelector } from "@/libs/redux/hooks"
-import store, { RootState } from "@/libs/redux/store"
+import store from "@/libs/redux/store"
 import { User } from "@/types/user"
 import { Add } from "@mui/icons-material"
 import { Box, Button, Typography } from "@mui/material"
@@ -23,10 +22,10 @@ const Page = () => {
   } = useUser()
 
   useEffect(() => {
-    if (store.getState()._persist.rehydrated && store.getState().user.users.length <= 0) {
+    if (!store.getState().user.users || store.getState().user.users.length <= 0) {
       store.dispatch(setUser(defaultUsers))
     }
-  }, [useAppSelector((state: RootState) => state._persist.rehydrated)])
+  }, [])
 
   return(
     <Box

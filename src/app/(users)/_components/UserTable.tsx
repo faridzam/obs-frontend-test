@@ -1,9 +1,10 @@
 import { colors } from "@/constants/colors";
 import { setPage, setRowsPerPage } from "@/libs/redux/features/users/users";
+import { useAppSelector } from "@/libs/redux/hooks";
 import { RootState } from "@/libs/redux/store";
 import { Delete, Description, Edit } from "@mui/icons-material";
 import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Fragment } from "react/jsx-runtime";
 import useUser from "../_hooks/useUser.hook";
 import UserModal from "./UserModal";
@@ -34,12 +35,13 @@ const UserTable = () => {
     modalOpen,
     handleOpenModal,
     handleCloseModal,
-    handleUpdateUser
+    handleUpdateUser,
+    handleDeleteUser
   } = useUser()
 
-  const users = useSelector((state:RootState) => state.user.users)
-  const page = useSelector((state:RootState) => state.user.page)
-  const rowsPerPage = useSelector((state:RootState) => state.user.rowsPerPage)
+  const users = useAppSelector((state:RootState) => state.user.users)
+  const page = useAppSelector((state:RootState) => state.user.page)
+  const rowsPerPage = useAppSelector((state:RootState) => state.user.rowsPerPage)
 
   const handleChangePage = (_: unknown, newPage: number) => {
     dispatch(setPage(newPage));
@@ -87,7 +89,7 @@ const UserTable = () => {
           </TableHead>
           <TableBody>
             {users
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
                   <Fragment key={`user-${row.id}`} >
@@ -144,7 +146,7 @@ const UserTable = () => {
                         <IconButton onClick={() => handleOpenModal(`modal-update-${row.id}`)}>
                           <Edit />
                         </IconButton>
-                        <IconButton>
+                        <IconButton onClick={() => handleDeleteUser(row.id!)}>
                           <Delete />
                         </IconButton>
                       </TableCell>
@@ -159,7 +161,7 @@ const UserTable = () => {
     <TablePagination
       rowsPerPageOptions={[10, 25, 100]}
       component="div"
-      count={users.length}
+      count={users?.length}
       rowsPerPage={rowsPerPage}
       page={page}
       onPageChange={handleChangePage}
