@@ -170,16 +170,14 @@ const UserTable = () => {
                         <TableCell
                           align={'left'}
                           sx={
-                            !smallScreen 
-                            ?
-                            {
-                              position: 'sticky',
-                              right: 0,
-                              background: colors.secondary.light,
-                              zIndex: '998 !important',
-                            }
-                            :
-                            {}
+                            !smallScreen
+                              ? {
+                                  position: 'sticky',
+                                  right: 0,
+                                  background: colors.secondary.light,
+                                  zIndex: '998 !important',
+                                }
+                              : {}
                           }
                         >
                           <IconButton

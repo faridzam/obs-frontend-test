@@ -25,7 +25,7 @@ const Sidebar = (props: ISidebarProps) => {
         width: '100%',
         minWidth: '250px',
         paddingTop: '104px',
-        zIndex: '10000 !important'
+        zIndex: '10000 !important',
       }}
     >
       <Box
@@ -38,8 +38,8 @@ const Sidebar = (props: ISidebarProps) => {
           background: colors.secondary.light,
           boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
           opacity: '0.2',
-          backdropFilter: 'blur(5px)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
+          backdropFilter: 'blur(8px)',
+          outline: '1px solid rgba(255, 255, 255, 0.3)',
         }}
       />
       <List>
