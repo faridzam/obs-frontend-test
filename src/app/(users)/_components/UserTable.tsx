@@ -15,6 +15,8 @@ import {
   TablePagination,
   TableRow,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { Fragment } from 'react/jsx-runtime'
@@ -42,6 +44,9 @@ const columns: readonly Column[] = [
 
 const UserTable = () => {
   const dispatch = useDispatch()
+
+  const theme = useTheme()
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   const {
     modalOpen,
@@ -84,13 +89,13 @@ const UserTable = () => {
                     key={column.id}
                     align={column.align}
                     sx={
-                      column.id === 'action'
+                      column.id === 'action' && !smallScreen
                         ? {
                             minWidth: column.minWidth,
                             position: 'sticky',
                             right: 0,
                             background: colors.secondary.dark,
-                            zIndex: '9999 !important',
+                            zIndex: '999 !important',
                           }
                         : {
                             minWidth: column.minWidth,
@@ -164,12 +169,18 @@ const UserTable = () => {
                         </TableCell>
                         <TableCell
                           align={'left'}
-                          sx={{
-                            position: 'sticky',
-                            right: 0,
-                            background: colors.secondary.light,
-                            zIndex: '9998 !important',
-                          }}
+                          sx={
+                            !smallScreen 
+                            ?
+                            {
+                              position: 'sticky',
+                              right: 0,
+                              background: colors.secondary.light,
+                              zIndex: '998 !important',
+                            }
+                            :
+                            {}
+                          }
                         >
                           <IconButton
                             data-testid={`detail-user-button-${row.id}`}

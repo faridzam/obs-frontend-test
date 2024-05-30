@@ -40,6 +40,7 @@ const UserModal = (props: IUserModalProps) => {
     onUpdate = () => {},
     ...restProps
   } = props
+  
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
 

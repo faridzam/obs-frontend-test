@@ -24,10 +24,24 @@ const Sidebar = (props: ISidebarProps) => {
         height: '100%',
         width: '100%',
         minWidth: '250px',
-        backgroundColor: colors.white.main,
         paddingTop: '104px',
+        zIndex: '10000 !important'
       }}
     >
+      <Box
+        position={'absolute'}
+        width={'100%'}
+        height={'100%'}
+        top={0}
+        left={0}
+        sx={{
+          background: colors.secondary.light,
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+          opacity: '0.2',
+          backdropFilter: 'blur(5px)',
+          border: '1px solid rgba(255, 255, 255, 0.3)',
+        }}
+      />
       <List>
         {['Users'].map(text => (
           <ListItem key={text} disablePadding>
