@@ -1,4 +1,4 @@
-import store from "@/libs/redux/store"
+import store from '@/libs/redux/store'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const iterateObject = (obj: any) => {
@@ -28,12 +28,12 @@ export const checkEmptyForm = (obj: any, result: boolean[]): boolean[] => {
   return result
 }
 
-export const getLargestId = (): number => {
+export const getNewId = (): number => {
   let highestId = 0
-  store.getState().user.users.map( (user) => {
+  store.getState().user.users.map(user => {
     if (highestId < user.id!) {
       highestId = user.id!
     }
   })
-  return highestId+1
+  return highestId + 1
 }

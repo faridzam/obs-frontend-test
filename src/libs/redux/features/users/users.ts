@@ -1,5 +1,4 @@
 import { User } from '@/types/user'
-import { getLargestId } from '@/utils/object'
 import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit/react'
 
@@ -28,7 +27,7 @@ export const userSlice = createSlice({
     },
     addUser: (state, action: PayloadAction<User>) => {
       try {
-        state.users.push({ ...action.payload, id: getLargestId() })
+        state.users.push({ ...action.payload })
       } catch (error) {
         console.log(error)
       }

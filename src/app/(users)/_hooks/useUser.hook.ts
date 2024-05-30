@@ -1,5 +1,6 @@
 import { addUser, deleteUser, updateUser } from '@/libs/redux/features/users/users'
 import { User } from '@/types/user'
+import { getNewId } from '@/utils/object'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -25,6 +26,7 @@ const useUser = () => {
 
   const handleCreateUser = (data: User) => {
     try {
+      data.id = getNewId()
       const createdUser = dispatch(addUser(data))
       setModalOpen({})
       return createdUser.payload.name
