@@ -127,12 +127,17 @@ const UserTable = () => {
                         data={row}
                         onClose={handleCloseModal}
                       />
-                      <TableRow hover role="checkbox" tabIndex={-1} data-testid={`user-row-${row.id}`}>
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        data-testid={`user-row-${row.id}`}
+                      >
                         <TableCell align={'center'}>
                           <CircleImage
                             src={`https://picsum.photos/id/${row.id}/40.webp`}
                             alt={`photo-${row.id}`}
-                            size='40px'
+                            size="40px"
                           />
                         </TableCell>
                         <TableCell align={'left'}>

@@ -13,7 +13,7 @@ import {
   Divider,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2'
 import { ChangeEvent, useState } from 'react'
@@ -28,8 +28,6 @@ interface IUserModalProps {
   onUpdate?: (data: User) => void
   [key: string]: any
 }
-
-
 
 const UserModal = (props: IUserModalProps) => {
   const {

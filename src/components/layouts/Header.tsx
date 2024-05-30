@@ -44,9 +44,9 @@ const Header = (props: IHeaderProps) => {
             <Notifications sx={{ color: colors.white.light, fontSize: '32px' }} />
           </IconButton>
           <CircleImage
-            src='https://picsum.photos/40.webp'
-            alt='account_avatar'
-            size='40px'
+            src="https://picsum.photos/40.webp"
+            alt="account_avatar"
+            size="40px"
           />
         </Box>
       </Grid2>

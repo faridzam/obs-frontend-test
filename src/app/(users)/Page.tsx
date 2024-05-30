@@ -11,9 +11,9 @@ import UserTable from './_components/UserTable'
 import useUser from './_hooks/useUser.hook'
 
 const Page = () => {
-  const { defaultUsers } = useLoaderData() as { defaultUsers: User[] };
+  const { defaultUsers } = useLoaderData() as { defaultUsers: User[] }
 
-  const { modalOpen, handleOpenModal, handleCloseModal, handleCreateUser } = useUser();
+  const { modalOpen, handleOpenModal, handleCloseModal, handleCreateUser } = useUser()
 
   useEffect(() => {
     if (!store.getState().user.users || store.getState().user.users.length <= 0) {
@@ -31,8 +31,15 @@ const Page = () => {
         onClose={() => handleCloseModal('modal-create')}
         onCreate={data => handleCreateUser(data)}
       />
-      <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} marginTop={'32px'}>
-        <Typography variant="h4" fontWeight={500}>User Lists</Typography>
+      <Box
+        display={'flex'}
+        alignItems={'center'}
+        justifyContent={'space-between'}
+        marginTop={'32px'}
+      >
+        <Typography variant="h4" fontWeight={500}>
+          User Lists
+        </Typography>
         <Button
           data-testid="create-user-button"
           variant="contained"

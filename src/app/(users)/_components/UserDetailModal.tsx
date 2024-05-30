@@ -1,10 +1,18 @@
-import CircleImage from "@/components/images/CircleImage"
-import { colors } from "@/constants/colors"
-import { initialStateUser } from "@/constants/user"
-import { User } from "@/types/user"
-import { Close } from "@mui/icons-material"
-import { Box, Dialog, DialogContent, IconButton, Typography, useMediaQuery, useTheme } from "@mui/material"
-import Grid2 from "@mui/material/Unstable_Grid2"
+import CircleImage from '@/components/images/CircleImage'
+import { colors } from '@/constants/colors'
+import { initialStateUser } from '@/constants/user'
+import { User } from '@/types/user'
+import { Close } from '@mui/icons-material'
+import {
+  Box,
+  Dialog,
+  DialogContent,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material'
+import Grid2 from '@mui/material/Unstable_Grid2'
 
 interface IUserDetailModalProps {
   id: string
@@ -15,13 +23,7 @@ interface IUserDetailModalProps {
 }
 
 const UserDetailModal = (props: IUserDetailModalProps) => {
-  const {
-    id,
-    open,
-    data = initialStateUser,
-    onClose,
-    ...restProps
-  } = props
+  const { id, open, data = initialStateUser, onClose, ...restProps } = props
 
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
@@ -37,19 +39,28 @@ const UserDetailModal = (props: IUserDetailModalProps) => {
         zIndex: '10000',
       }}
       PaperProps={{
-        sx:{
-          backgroundImage: `linear-gradient(45deg, ${colors.secondary.dark}, ${colors.white.main})`
-
-        }
+        sx: {
+          backgroundImage: `linear-gradient(45deg, ${colors.secondary.dark}, ${colors.white.main})`,
+        },
       }}
     >
-      <Box position={'absolute'} top={{xs: 32, sm: 32, md: 16}} right={{xs: 32, sm: 32, md: 16}}>
+      <Box
+        position={'absolute'}
+        top={{ xs: 32, sm: 32, md: 16 }}
+        right={{ xs: 32, sm: 32, md: 16 }}
+      >
         <IconButton onClick={() => onClose(id)}>
-          <Close sx={{fontSize: '32px'}} />
+          <Close sx={{ fontSize: '32px' }} />
         </IconButton>
       </Box>
       <DialogContent>
-        <Grid2 container direction={'row'} spacing={0} columns={16} minWidth={{md: '500px'}}>
+        <Grid2
+          container
+          direction={'row'}
+          spacing={0}
+          columns={16}
+          minWidth={{ md: '500px' }}
+        >
           <Grid2 xs={16} display={'flex'} justifyContent={'center'} height={140}>
             <CircleImage
               src={`https://picsum.photos/id/${data.id}/140.webp`}
@@ -58,7 +69,7 @@ const UserDetailModal = (props: IUserDetailModalProps) => {
             />
           </Grid2>
           <Grid2 xs={16} display={'flex'} justifyContent={'center'} marginTop={'24px'}>
-            <Typography variant="h4" >{data.name}</Typography>
+            <Typography variant="h4">{data.name}</Typography>
           </Grid2>
           <Grid2
             xs={16}
@@ -83,7 +94,7 @@ const UserDetailModal = (props: IUserDetailModalProps) => {
                 boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
                 opacity: '0.2',
                 backdropFilter: 'blur(5px)',
-                border: '1px solid rgba(255, 255, 255, 0.3)'
+                border: '1px solid rgba(255, 255, 255, 0.3)',
               }}
             />
             <Grid2
@@ -102,11 +113,15 @@ const UserDetailModal = (props: IUserDetailModalProps) => {
                 <Typography variant="subtitle2">{data.username}</Typography>
               </Box>
               <Box display={'flex'} flexDirection={'column'} gap={'8px'}>
-                <Typography variant="body2" color={colors.black.light}>Phone</Typography>
+                <Typography variant="body2" color={colors.black.light}>
+                  Phone
+                </Typography>
                 <Typography variant="subtitle2">{data.phone}</Typography>
               </Box>
               <Box display={'flex'} flexDirection={'column'} gap={'8px'}>
-                <Typography variant="body2" color={colors.black.light}>Address</Typography>
+                <Typography variant="body2" color={colors.black.light}>
+                  Address
+                </Typography>
                 <Typography variant="subtitle2" paragraph>{`
                   ${data.address.street}, ${data.address.suite}
                   ${data.address.city}, ${data.address.zipcode}
@@ -125,15 +140,21 @@ const UserDetailModal = (props: IUserDetailModalProps) => {
               zIndex={999}
             >
               <Box display={'flex'} flexDirection={'column'} gap={'8px'}>
-                <Typography variant="body2" color={colors.black.light}>Email</Typography>
+                <Typography variant="body2" color={colors.black.light}>
+                  Email
+                </Typography>
                 <Typography variant="subtitle2">{data.email}</Typography>
               </Box>
               <Box display={'flex'} flexDirection={'column'} gap={'8px'}>
-                <Typography variant="body2" color={colors.black.light}>Website</Typography>
+                <Typography variant="body2" color={colors.black.light}>
+                  Website
+                </Typography>
                 <Typography variant="subtitle2">{data.website}</Typography>
               </Box>
               <Box display={'flex'} flexDirection={'column'} gap={'8px'}>
-                <Typography variant="body2" color={colors.black.light}>Company</Typography>
+                <Typography variant="body2" color={colors.black.light}>
+                  Company
+                </Typography>
                 <Typography variant="subtitle2">{data.company.name}</Typography>
               </Box>
             </Grid2>
