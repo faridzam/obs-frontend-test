@@ -1,3 +1,4 @@
+import CircleImage from "@/components/images/CircleImage"
 import { colors } from "@/constants/colors"
 import { initialStateUser } from "@/constants/user"
 import { User } from "@/types/user"
@@ -50,12 +51,10 @@ const UserDetailModal = (props: IUserDetailModalProps) => {
       <DialogContent>
         <Grid2 container direction={'row'} spacing={0} columns={16} minWidth={{md: '500px'}}>
           <Grid2 xs={16} display={'flex'} justifyContent={'center'} height={140}>
-            <img
+            <CircleImage
               src={`https://picsum.photos/id/${data.id}/140.webp`}
               alt={`photo-${data.id}`}
-              style={{
-                borderRadius: '100px',
-              }}
+              size="140px"
             />
           </Grid2>
           <Grid2 xs={16} display={'flex'} justifyContent={'center'} marginTop={'24px'}>

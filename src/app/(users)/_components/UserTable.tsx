@@ -1,3 +1,4 @@
+import CircleImage from '@/components/images/CircleImage'
 import { colors } from '@/constants/colors'
 import { setPage, setRowsPerPage } from '@/libs/redux/features/users/users'
 import { useAppSelector } from '@/libs/redux/hooks'
@@ -128,12 +129,10 @@ const UserTable = () => {
                       />
                       <TableRow hover role="checkbox" tabIndex={-1} data-testid={`user-row-${row.id}`}>
                         <TableCell align={'center'}>
-                          <img
+                          <CircleImage
                             src={`https://picsum.photos/id/${row.id}/40.webp`}
                             alt={`photo-${row.id}`}
-                            style={{
-                              borderRadius: '8px',
-                            }}
+                            size='40px'
                           />
                         </TableCell>
                         <TableCell align={'left'}>

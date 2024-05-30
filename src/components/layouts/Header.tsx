@@ -1,8 +1,9 @@
 import Logo from '@/assets/images/logo/logo.svg'
 import { colors } from '@/constants/colors'
 import { MenuRounded, Notifications } from '@mui/icons-material'
-import { Avatar, Box, IconButton, Typography } from '@mui/material'
+import { Box, IconButton, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import CircleImage from '../images/CircleImage'
 
 interface IHeaderProps {
   toggleDrawer: (val: boolean) => void
@@ -42,7 +43,11 @@ const Header = (props: IHeaderProps) => {
           <IconButton>
             <Notifications sx={{ color: colors.white.light, fontSize: '32px' }} />
           </IconButton>
-          <Avatar alt="account_avatar" src="https://picsum.photos/40.webp" />
+          <CircleImage
+            src='https://picsum.photos/40.webp'
+            alt='account_avatar'
+            size='40px'
+          />
         </Box>
       </Grid2>
     </Grid2>
