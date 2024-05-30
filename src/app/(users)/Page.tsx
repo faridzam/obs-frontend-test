@@ -31,8 +31,8 @@ const Page = () => {
         onClose={() => handleCloseModal('modal-create')}
         onCreate={data => handleCreateUser(data)}
       />
-      <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
-        <Typography variant="h4">User Lists</Typography>
+      <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} marginTop={'32px'}>
+        <Typography variant="h4" fontWeight={500}>User Lists</Typography>
         <Button
           data-testid="create-user-button"
           variant="contained"

@@ -1,4 +1,5 @@
 import TextInput from '@/components/inputs/TextInput'
+import { initialStateUser } from '@/constants/user'
 import { User } from '@/types/user'
 import { checkEmptyForm } from '@/utils/object'
 import { setNestedState } from '@/utils/stateHelper'
@@ -28,36 +29,14 @@ interface IUserModalProps {
   [key: string]: any
 }
 
-const initialState: User = {
-  id: 0,
-  name: '',
-  username: '',
-  email: '',
-  address: {
-    street: '',
-    suite: '',
-    city: '',
-    zipcode: '',
-    geo: {
-      lng: '-6.174710065565897',
-      lat: '106.78988380973301',
-    },
-  },
-  phone: '',
-  website: '',
-  company: {
-    name: '',
-    catchPhrase: '',
-    bs: '',
-  },
-}
+
 
 const UserModal = (props: IUserModalProps) => {
   const {
     id,
     type = 'create',
     open,
-    data = initialState,
+    data = initialStateUser,
     onClose,
     onCreate = () => {},
     onUpdate = () => {},

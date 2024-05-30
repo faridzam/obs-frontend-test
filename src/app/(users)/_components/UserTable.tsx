@@ -18,6 +18,7 @@ import {
 import { useDispatch } from 'react-redux'
 import { Fragment } from 'react/jsx-runtime'
 import useUser from '../_hooks/useUser.hook'
+import UserDetailModal from './UserDetailModal'
 import UserModal from './UserModal'
 
 interface Column {
@@ -118,6 +119,13 @@ const UserTable = () => {
                         onClose={handleCloseModal}
                         onUpdate={data => handleUpdateUser(data)}
                       />
+                      <UserDetailModal
+                        data-testid={`modal-detail-${row.id}`}
+                        id={`modal-detail-${row.id}`}
+                        open={modalOpen[`modal-detail-${row.id}`] === true}
+                        data={row}
+                        onClose={handleCloseModal}
+                      />
                       <TableRow hover role="checkbox" tabIndex={-1} data-testid={`user-row-${row.id}`}>
                         <TableCell align={'center'}>
                           <img
@@ -159,7 +167,10 @@ const UserTable = () => {
                             zIndex: '9998 !important',
                           }}
                         >
-                          <IconButton>
+                          <IconButton
+                            data-testid={`detail-user-button-${row.id}`}
+                            onClick={() => handleOpenModal(`modal-detail-${row.id}`)}
+                          >
                             <Description />
                           </IconButton>
                           <IconButton
