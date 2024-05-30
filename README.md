@@ -22,6 +22,7 @@ List the key features of app:
 ![Image 1](./src/assets/screenshot/screenshot_1.png)
 ![Image 2](./src/assets/screenshot/screenshot_2.png)
 ![Image 3](./src/assets/screenshot/screenshot_3.png)
+![Image 4](./src/assets/screenshot/screenshot_4.png)
 
 ## Prerequisites
 
