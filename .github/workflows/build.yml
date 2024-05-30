@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI/CD
 
 on:
   push:
@@ -40,3 +40,17 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+    - name: Pull and run docker image
+      id: deploy
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        passphrase: ${{secrets.SSH_PASSPHRASE}}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          docker pull faridzam/obs-frontend-test:master
+          docker stop obs-frontend-test
+          docker rm obs-frontend-test
+          docker container run -d --restart always --name obs-frontend-test -p 3001:3001 faridzam/obs-frontend-test:master
