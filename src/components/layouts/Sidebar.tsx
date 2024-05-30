@@ -1,5 +1,5 @@
-import { colors } from '@/constants/colors';
-import { SupervisorAccount } from '@mui/icons-material';
+import { colors } from '@/constants/colors'
+import { SupervisorAccount } from '@mui/icons-material'
 import {
   Box,
   List,
@@ -8,14 +8,14 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-} from '@mui/material';
+} from '@mui/material'
 
 interface ISidebarProps {
-  toggleDrawer?: (val: boolean) => void;
+  toggleDrawer?: (val: boolean) => void
 }
 
 const Sidebar = (props: ISidebarProps) => {
-  const { toggleDrawer = () => {} } = props;
+  const { toggleDrawer = () => {} } = props
   return (
     <Box
       role="presentation"
@@ -29,12 +29,10 @@ const Sidebar = (props: ISidebarProps) => {
       }}
     >
       <List>
-        {['Users'].map((text) => (
+        {['Users'].map(text => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon
-                sx={{ color: `${colors.primary.light} !important` }}
-              >
+              <ListItemIcon sx={{ color: `${colors.primary.light} !important` }}>
                 <SupervisorAccount />
               </ListItemIcon>
               <ListItemText>
@@ -47,7 +45,7 @@ const Sidebar = (props: ISidebarProps) => {
         ))}
       </List>
     </Box>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

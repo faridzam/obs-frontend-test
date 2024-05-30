@@ -1,8 +1,8 @@
-import TextInput from '@/components/inputs/TextInput';
-import { User } from '@/types/user';
-import { checkEmptyForm } from '@/utils/object';
-import { setNestedState } from '@/utils/stateHelper';
-import { capitalizeFirstLetter } from '@/utils/strings';
+import TextInput from '@/components/inputs/TextInput'
+import { User } from '@/types/user'
+import { checkEmptyForm } from '@/utils/object'
+import { setNestedState } from '@/utils/stateHelper'
+import { capitalizeFirstLetter } from '@/utils/strings'
 import {
   Button,
   Dialog,
@@ -12,19 +12,20 @@ import {
   Divider,
   Typography,
   useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import { ChangeEvent, useState } from 'react';
+  useTheme
+} from '@mui/material'
+import Grid2 from '@mui/material/Unstable_Grid2'
+import { ChangeEvent, useState } from 'react'
 
 interface IUserModalProps {
-  id: string;
-  type?: 'create' | 'update';
-  open: boolean;
-  data?: User;
-  onClose: (id: string) => void;
-  onCreate?: (data: User) => void;
-  onUpdate?: (data: User) => void;
+  id: string
+  type?: 'create' | 'update'
+  open: boolean | undefined
+  data?: User
+  onClose: (id: string) => void
+  onCreate?: (data: User) => void
+  onUpdate?: (data: User) => void
+  [key: string]: any
 }
 
 const initialState: User = {
@@ -49,7 +50,7 @@ const initialState: User = {
     catchPhrase: '',
     bs: '',
   },
-};
+}
 
 const UserModal = (props: IUserModalProps) => {
   const {
@@ -60,40 +61,42 @@ const UserModal = (props: IUserModalProps) => {
     onClose,
     onCreate = () => {},
     onUpdate = () => {},
-  } = props;
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+    ...restProps
+  } = props
+  const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   const onSubmit = () => {
     switch (type) {
       case 'create':
-        onCreate(form);
-        break;
+        onCreate(form)
+        break
       case 'update':
-        onUpdate(form);
-        break;
+        onUpdate(form)
+        break
 
       default:
-        break;
+        break
     }
-  };
+  }
 
-  const [form, setForm] = useState<User>(() => data);
+  const [form, setForm] = useState<User>(() => data)
 
   const handleChangeForm = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = event.target;
-    const keys = name.split('.');
+    const { name, value } = event.target
+    const keys = name.split('.')
 
-    setForm((prevState: User) => setNestedState(prevState, keys, value));
-  };
+    setForm((prevState: User) => setNestedState(prevState, keys, value))
+  }
 
-  const disabledSubmit = checkEmptyForm(form, []).includes(true);
+  const disabledSubmit = checkEmptyForm(form, []).includes(true)
 
   return (
     <>
       <Dialog
+        {...restProps}
         id={id}
         fullScreen={fullScreen}
         open={open || false}
@@ -116,7 +119,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="name"
                 placeholder="Enter user's name"
                 value={form.name}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -125,7 +128,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="username"
                 placeholder="Enter user's username"
                 value={form.username}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -135,7 +138,7 @@ const UserModal = (props: IUserModalProps) => {
                 type="email"
                 placeholder="Enter user's email"
                 value={form.email}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -145,7 +148,7 @@ const UserModal = (props: IUserModalProps) => {
                 type="tel"
                 placeholder="Enter user's phone number"
                 value={form.phone}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -154,7 +157,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="website"
                 placeholder="Enter user's website url"
                 value={form.website}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={16}>
@@ -169,7 +172,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="address.street"
                 placeholder="Enter user's address (street)"
                 value={form.address.street}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -178,7 +181,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="address.suite"
                 placeholder="Enter user's address (suite)"
                 value={form.address.suite}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -187,7 +190,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="address.city"
                 placeholder="Enter user's address (city)"
                 value={form.address.city}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -196,7 +199,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="address.zipcode"
                 placeholder="Enter user's address (zip code)"
                 value={form.address.zipcode}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -206,7 +209,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="address.geo.lng"
                 placeholder="Enter user's address (longitude)"
                 value={form.address.geo.lng}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -216,7 +219,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="address.geo.lat"
                 placeholder="Enter user's address (latitude)"
                 value={form.address.geo.lat}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={16}>
@@ -231,7 +234,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="company.name"
                 placeholder="Enter user's company name"
                 value={form.company.name}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -240,7 +243,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="company.catchPhrase"
                 placeholder="Enter user's company catch phrase"
                 value={form.company.catchPhrase}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
             <Grid2 xs={8}>
@@ -249,7 +252,7 @@ const UserModal = (props: IUserModalProps) => {
                 name="company.bs"
                 placeholder="Enter user's company bs"
                 value={form.company.bs}
-                onChange={(e) => handleChangeForm(e)}
+                onChange={e => handleChangeForm(e)}
               />
             </Grid2>
           </Grid2>
@@ -270,7 +273,7 @@ const UserModal = (props: IUserModalProps) => {
         </DialogActions>
       </Dialog>
     </>
-  );
-};
+  )
+}
 
-export default UserModal;
+export default UserModal

@@ -23,4 +23,4 @@ export const colors = {
     main: '#ddd',
     light: '#fff',
   },
-};
+}

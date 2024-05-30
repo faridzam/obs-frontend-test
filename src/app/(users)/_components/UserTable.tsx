@@ -1,8 +1,8 @@
-import { colors } from '@/constants/colors';
-import { setPage, setRowsPerPage } from '@/libs/redux/features/users/users';
-import { useAppSelector } from '@/libs/redux/hooks';
-import { RootState } from '@/libs/redux/store';
-import { Delete, Description, Edit } from '@mui/icons-material';
+import { colors } from '@/constants/colors'
+import { setPage, setRowsPerPage } from '@/libs/redux/features/users/users'
+import { useAppSelector } from '@/libs/redux/hooks'
+import { RootState } from '@/libs/redux/store'
+import { Delete, Description, Edit } from '@mui/icons-material'
 import {
   IconButton,
   Paper,
@@ -14,25 +14,17 @@ import {
   TablePagination,
   TableRow,
   Typography,
-} from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { Fragment } from 'react/jsx-runtime';
-import useUser from '../_hooks/useUser.hook';
-import UserModal from './UserModal';
+} from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { Fragment } from 'react/jsx-runtime'
+import useUser from '../_hooks/useUser.hook'
+import UserModal from './UserModal'
 
 interface Column {
-  id:
-    | 'photo'
-    | 'name'
-    | 'username'
-    | 'email'
-    | 'address'
-    | 'phone'
-    | 'company'
-    | 'action';
-  label: string;
-  minWidth?: number;
-  align?: 'right' | 'left' | 'center';
+  id: 'photo' | 'name' | 'username' | 'email' | 'address' | 'phone' | 'company' | 'action'
+  label: string
+  minWidth?: number
+  align?: 'right' | 'left' | 'center'
 }
 
 const columns: readonly Column[] = [
@@ -44,10 +36,10 @@ const columns: readonly Column[] = [
   { id: 'phone', label: 'Phone', minWidth: 100, align: 'left' },
   { id: 'company', label: 'Company', minWidth: 100, align: 'left' },
   { id: 'action', label: 'Action', minWidth: 120, align: 'left' },
-];
+]
 
 const UserTable = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const {
     modalOpen,
@@ -55,24 +47,20 @@ const UserTable = () => {
     handleCloseModal,
     handleUpdateUser,
     handleDeleteUser,
-  } = useUser();
+  } = useUser()
 
-  const users = useAppSelector((state: RootState) => state.user.users);
-  const page = useAppSelector((state: RootState) => state.user.page);
-  const rowsPerPage = useAppSelector(
-    (state: RootState) => state.user.rowsPerPage
-  );
+  const users = useAppSelector((state: RootState) => state.user.users)
+  const page = useAppSelector((state: RootState) => state.user.page)
+  const rowsPerPage = useAppSelector((state: RootState) => state.user.rowsPerPage)
 
   const handleChangePage = (_: unknown, newPage: number) => {
-    dispatch(setPage(newPage));
-  };
+    dispatch(setPage(newPage))
+  }
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    dispatch(setRowsPerPage(+event.target.value));
-    dispatch(setPage(0));
-  };
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setRowsPerPage(+event.target.value))
+    dispatch(setPage(0))
+  }
 
   return (
     <>
@@ -85,13 +73,11 @@ const UserTable = () => {
           padding: '0 !important',
         }}
       >
-        <TableContainer
-          sx={{ height: '70vh', minHeight: '250px', maxHeight: '1154px' }}
-        >
+        <TableContainer sx={{ height: '70vh', minHeight: '250px', maxHeight: '1154px' }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                {columns.map((column) => (
+                {columns.map(column => (
                   <TableCell
                     key={column.id}
                     align={column.align}
@@ -120,18 +106,19 @@ const UserTable = () => {
             <TableBody>
               {users
                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
+                .map(row => {
                   return (
                     <Fragment key={`user-${row.id}`}>
                       <UserModal
+                        data-testid={`modal-update-${row.id}`}
                         id={`modal-update-${row.id}`}
-                        open={modalOpen![`modal-update-${row.id}`]}
+                        open={modalOpen[`modal-update-${row.id}`] === true}
                         type="update"
                         data={row}
                         onClose={handleCloseModal}
-                        onUpdate={(data) => handleUpdateUser(data)}
+                        onUpdate={data => handleUpdateUser(data)}
                       />
-                      <TableRow hover role="checkbox" tabIndex={-1}>
+                      <TableRow hover role="checkbox" tabIndex={-1} data-testid={`user-row-${row.id}`}>
                         <TableCell align={'center'}>
                           <img
                             src={`https://picsum.photos/id/${row.id}/40.webp`}
@@ -145,20 +132,14 @@ const UserTable = () => {
                           <Typography variant="body2">{row.name}</Typography>
                         </TableCell>
                         <TableCell align={'left'}>
-                          <Typography variant="body2">
-                            {row.username}
-                          </Typography>
+                          <Typography variant="body2">{row.username}</Typography>
                         </TableCell>
                         <TableCell align={'left'}>
                           <Typography variant="body2">{row.email}</Typography>
                         </TableCell>
                         <TableCell align={'left'}>
-                          <Typography variant="body2">
-                            {row.address.street}
-                          </Typography>
-                          <Typography variant="body2">
-                            {row.address.suite}
-                          </Typography>
+                          <Typography variant="body2">{row.address.street}</Typography>
+                          <Typography variant="body2">{row.address.suite}</Typography>
                           <Typography variant="body2">
                             {row.address.city}, {row.address.zipcode}
                           </Typography>
@@ -167,9 +148,7 @@ const UserTable = () => {
                           <Typography variant="body2">{row.phone}</Typography>
                         </TableCell>
                         <TableCell align={'left'}>
-                          <Typography variant="body2">
-                            {row.company.name}
-                          </Typography>
+                          <Typography variant="body2">{row.company.name}</Typography>
                         </TableCell>
                         <TableCell
                           align={'left'}
@@ -184,19 +163,21 @@ const UserTable = () => {
                             <Description />
                           </IconButton>
                           <IconButton
-                            onClick={() =>
-                              handleOpenModal(`modal-update-${row.id}`)
-                            }
+                            data-testid={`update-user-button-${row.id}`}
+                            onClick={() => handleOpenModal(`modal-update-${row.id}`)}
                           >
                             <Edit />
                           </IconButton>
-                          <IconButton onClick={() => handleDeleteUser(row.id!)}>
+                          <IconButton
+                            data-testid={`delete-user-button-${row.id}`}
+                            onClick={() => handleDeleteUser(row.id!)}
+                          >
                             <Delete />
                           </IconButton>
                         </TableCell>
                       </TableRow>
                     </Fragment>
-                  );
+                  )
                 })}
             </TableBody>
           </Table>
@@ -212,7 +193,7 @@ const UserTable = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </>
-  );
-};
+  )
+}
 
-export default UserTable;
+export default UserTable

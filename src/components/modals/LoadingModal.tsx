@@ -1,20 +1,12 @@
-import {
-  CircularProgress,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from '@mui/material';
-import { SyntheticEvent } from 'react';
+import { CircularProgress, Dialog, DialogContent, DialogTitle } from '@mui/material'
+import { SyntheticEvent } from 'react'
 
 const LoadingModal = () => {
-  const handleDlgClose = (
-    _event: SyntheticEvent<Element, Event>,
-    reason: string
-  ) => {
+  const handleDlgClose = (_event: SyntheticEvent<Element, Event>, reason: string) => {
     if (reason && reason == 'backdropClick') {
-      return;
+      return
     }
-  };
+  }
 
   return (
     <Dialog
@@ -38,7 +30,7 @@ const LoadingModal = () => {
       </DialogContent>
       <DialogTitle>Loading...</DialogTitle>
     </Dialog>
-  );
-};
+  )
+}
 
-export default LoadingModal;
+export default LoadingModal

@@ -1,16 +1,16 @@
-import { Box, Drawer } from '@mui/material';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import BreadcrumbsPath from './BreadcrumbsPath';
-import Header from './Header';
-import Sidebar from './Sidebar';
+import { Box, Drawer } from '@mui/material'
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import BreadcrumbsPath from './BreadcrumbsPath'
+import Header from './Header'
+import Sidebar from './Sidebar'
 
 const MainLayout = () => {
-  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
   const toggleSidebarOpen = (val: boolean) => {
-    setSidebarOpen(val);
-  };
+    setSidebarOpen(val)
+  }
   return (
     <Grid2
       columns={16}
@@ -47,7 +47,7 @@ const MainLayout = () => {
         </Box>
       </Grid2>
     </Grid2>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout

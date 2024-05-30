@@ -1,24 +1,19 @@
-import { colors } from '@/constants/colors';
-import {
-  FormControl,
-  FormHelperText,
-  InputBase,
-  Typography,
-} from '@mui/material';
-import { ChangeEvent, HTMLInputTypeAttribute } from 'react';
+import { colors } from '@/constants/colors'
+import { FormControl, FormHelperText, InputBase, Typography } from '@mui/material'
+import { ChangeEvent, HTMLInputTypeAttribute } from 'react'
 
 interface ITextInputProps {
-  name?: string;
-  type?: HTMLInputTypeAttribute;
-  label: string;
-  placeholder?: string;
-  errorHintText?: string;
-  hintText?: string;
-  disabled?: boolean;
-  error?: boolean;
-  limitChar?: number;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  name?: string
+  type?: HTMLInputTypeAttribute
+  label: string
+  placeholder?: string
+  errorHintText?: string
+  hintText?: string
+  disabled?: boolean
+  error?: boolean
+  limitChar?: number
+  value: string
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }
 
 const TextInput = (props: ITextInputProps) => {
@@ -34,13 +29,11 @@ const TextInput = (props: ITextInputProps) => {
     limitChar,
     value,
     onChange,
-  } = props;
+  } = props
 
-  const handleChangeValue = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    onChange(e);
-  };
+  const handleChangeValue = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    onChange(e)
+  }
 
   return (
     <FormControl fullWidth>
@@ -52,7 +45,7 @@ const TextInput = (props: ITextInputProps) => {
         name={name}
         disabled={disabled}
         value={value}
-        onChange={(e) => handleChangeValue(e)}
+        onChange={e => handleChangeValue(e)}
         inputProps={{
           maxLength: limitChar || '',
         }}
@@ -80,7 +73,7 @@ const TextInput = (props: ITextInputProps) => {
         {error ? errorHintText : hintText}
       </FormHelperText>
     </FormControl>
-  );
-};
+  )
+}
 
-export default TextInput;
+export default TextInput

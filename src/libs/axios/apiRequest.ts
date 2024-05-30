@@ -1,8 +1,8 @@
-import axios, { Axios, AxiosRequestConfig } from 'axios';
+import axios, { Axios, AxiosRequestConfig } from 'axios'
 
 type IConfig = AxiosRequestConfig & {
-  isLoading?: boolean;
-};
+  isLoading?: boolean
+}
 
 const requestConfig: IConfig = {
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -10,44 +10,44 @@ const requestConfig: IConfig = {
   headers: {
     accept: 'application/json',
   },
-};
+}
 
 class HttpRequest {
-  api: Axios;
+  api: Axios
   constructor() {
-    this.api = axios.create(requestConfig);
+    this.api = axios.create(requestConfig)
 
     this.api.interceptors.request.use(
-      (config) => {
-        return config;
+      config => {
+        return config
       },
-      (error) => {
-        return Promise.reject(error);
+      error => {
+        return Promise.reject(error)
       }
-    );
+    )
 
     this.api.interceptors.response.use(
-      (res) => {
-        return res;
+      res => {
+        return res
       },
-      async (error) => {
-        return Promise.reject(error);
+      async error => {
+        return Promise.reject(error)
       }
-    );
+    )
   }
 
   async get(endpoint: string, config?: IConfig) {
-    return this.api.get(endpoint, config);
+    return this.api.get(endpoint, config)
   }
   async post(endpoint: string, data: unknown, config?: IConfig) {
-    return this.api.post(endpoint, data, config);
+    return this.api.post(endpoint, data, config)
   }
   async patch(endpoint: string, data: unknown, config?: IConfig) {
-    return this.api.patch(endpoint, data, config);
+    return this.api.patch(endpoint, data, config)
   }
   async delete(endpoint: string) {
-    return this.api.delete(endpoint);
+    return this.api.delete(endpoint)
   }
 }
 
-export const apiRequest = new HttpRequest();
+export const apiRequest = new HttpRequest()

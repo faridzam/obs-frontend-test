@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import {
   FLUSH,
   PAUSE,
@@ -8,13 +8,13 @@ import {
   REHYDRATE,
   persistReducer,
   persistStore,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { userReducer } from './features/users/users';
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { userReducer } from './features/users/users'
 
 const reducers = combineReducers({
   user: userReducer,
-});
+})
 
 const persistedReducer = persistReducer(
   {
@@ -24,11 +24,11 @@ const persistedReducer = persistReducer(
     blacklist: [''],
   },
   reducers
-);
+)
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
@@ -36,11 +36,11 @@ const store = configureStore({
         ignoredPaths: ['items.dates'],
       },
     }),
-});
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
-export default store;
+export default store
 
-export const persistor = persistStore(store);
+export const persistor = persistStore(store)
