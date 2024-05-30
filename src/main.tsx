@@ -7,7 +7,7 @@ import { RouterProvider } from 'react-router-dom'
 import { PersistGate } from 'redux-persist/integration/react'
 import LoadingModal from './components/modals/LoadingModal.tsx'
 import { theme } from './constants/theme.ts'
-import './global.scss'
+import './global.css'
 import store, { persistor } from './libs/redux/store.ts'
 import Router from './router/index.tsx'
 
